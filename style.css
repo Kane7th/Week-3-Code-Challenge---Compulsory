@@ -7,86 +7,136 @@ body {
     flex-direction: column;
     align-items: center;
     background-color: #f8f8f8;
-  }
-  
-  header {
+}
+
+/* Header */
+header {
     width: 100%;
     text-align: center;
     background: #222;
     color: white;
     padding: 15px 0;
-  }
-  
-  main {
+}
+
+/* Main Layout - 3 Sections (Left, Center, Right) */
+main {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: flex-start;
     width: 90%;
     max-width: 1200px;
     margin-top: 20px;
-  }
-  
-  #film-details {
-    flex: 2;
-    padding: 20px;
+    gap: 20px;
+}
+
+/* Film List (Left Panel) */
+#films {
+    flex: 1;
     background: white;
+    padding: 10px;
+    max-height: 500px;
+    overflow-y: auto;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-  }
-  
-  #film-details img {
-    width: 100%;
-    max-width: 400px;
-    border-radius: 8px;
-  }
-  
-  #films {
-    flex: 1;
+    width: 250px;
+}
+
+#film-list {
     list-style: none;
     padding: 0;
     margin: 0;
-    max-height: 500px;
-    overflow-y: auto;
-    background: white;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-  }
-  
-  .film-item {
+}
+
+.film-item {
     padding: 10px;
     margin: 5px;
     background: #eee;
     cursor: pointer;
     transition: background 0.3s;
-  }
-  
-  .film-item:hover {
+}
+
+.film-item:hover {
     background: #ddd;
-  }
-  
-  button {
+}
+
+/* Center Section - Film Poster */
+#film-poster-container {
+    flex: 1.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 400px;
+}
+
+#film-poster {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 8px;
+}
+
+/* Film Details (Right Panel) */
+#film-details {
+    flex: 2;
+    padding: 20px;
+    background: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+}
+
+/* Film Title */
+#film-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Additional Film Details */
+#film-runtime,
+#film-showtime,
+#film-description,
+#film-tickets {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+/* Button Styles */
+button {
     padding: 10px 15px;
     background: #28a745;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 5px;
-  }
-  
-  button:disabled {
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #218838;
+}
+
+button:disabled {
     background: #ccc;
     cursor: not-allowed;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
     main {
-      flex-direction: column;
-      align-items: center;
+        flex-direction: column;
+        align-items: center;
     }
-    
-    #film-details,
-    #films {
-      width: 100%;
+
+    #films,
+    #film-poster-container,
+    #film-details {
+        width: 100%;
     }
-  }
+}

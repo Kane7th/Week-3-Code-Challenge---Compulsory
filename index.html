@@ -1,32 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flatdango</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Tickets</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Flatdango Movie Ticket App</h1>
-  </header>
-  
-  <main>
-    <section id="film-details">
-      <h2 id="film-title"></h2>
-      <img id="film-poster" src="" alt="Movie Poster">
-      <p id="film-runtime"></p>
-      <p id="film-showtime"></p>
-      <p id="film-description"></p>
-      <p id="film-tickets"></p>
-      <button id="buy-ticket-btn">Buy Ticket</button>
-    </section>
-    
-    <aside>
-      <ul id="films"></ul>
-    </aside>
-  </main>
-  
-  <script src="script.js"></script>
+
+    <!-- Header -->
+    <header>
+        <h1>Now Showing</h1>
+    </header>
+
+    <!-- Main Layout -->
+    <main>
+
+        <!-- Film List (Left Side) -->
+        <aside id="films">
+            <h2>Available Films</h2>
+            <ul id="film-list"></ul>
+        </aside>
+
+        <!-- Film Poster (Center) -->
+        <section id="film-poster-container">
+            <img id="film-poster" src="" alt="Film Poster">
+        </section>
+
+        <!-- Film Details (Right Side) -->
+        <section id="film-details">
+            <h2 id="film-title">Select a movie</h2>
+            <p id="film-description">Description will appear here...</p>
+            <p id="film-runtime"></p>
+            <p id="film-showtime"></p>
+            <p id="film-tickets"></p>
+            <button id="buy-ticket-btn">Buy Ticket</button>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>

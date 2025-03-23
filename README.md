@@ -49,9 +49,15 @@ A web application that allows users to browse movies, purchase tickets, and trac
 
 ## 📑 What You Will Expect
 ✅ **Clean & Structured Code** - Readable and well-commented
+
 ✅ **Proper Use of JavaScript** - Fetch API, Event Listeners, DOM Manipulation
+
 ✅ **Data Persistence** - JSON Server & LocalStorage
+
 ✅ **Good UI/UX** - Navigation, Responsive Layout
+
 ✅ **Feature Implementation** - Movie selection, ticket booking, most viewed films
+
 ✅ **GitHub Repository** - Organized with proper commits
+
 ---

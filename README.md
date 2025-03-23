@@ -1,55 +1,57 @@
+# 🎬 Flatdango - Movie Ticket App
 
-# Flatdango - Movie Ticket App 🎟️
-A web app that allows users to browse movies and purchase tickets.
+A web application that allows users to browse movies, purchase tickets, and track the most viewed films. Built with **HTML, CSS, JavaScript**, and uses a **JSON server** for backend data.
 
-🚀 Features
+---
+
+## 📌 Features
 ✅ View a list of available movies
 ✅ See movie details (poster, runtime, description, showtime)
 ✅ Check the number of remaining tickets
-✅ Purchase tickets (which decreases available ticket count)
-✅ Responsive design
+✅ Purchase tickets (decreasing available count)
+✅ Track most booked films in **Most Viewed Films** page
+✅ Data persists using **localStorage**
+✅ Fully responsive design
+✅ Navigation menu for easy access between pages
 
-🛠️ Tech Stack
-- HTML: Structure
+---
 
-- CSS: Styling
+## 🛠️ Tech Stack
+- **HTML**: Structure
+- **CSS**: Styling & Responsive Design
+- **JavaScript**: Functionality
+- **JSON Server**: Fake backend API
+- **LocalStorage**: Data Persistence
 
-- JavaScript: Functionality
+---
 
-- JSON Server: Fake backend
+## 💡 How It Works
+1. The app fetches movie data from `db.json`.
+2. Clicking a movie updates the details section.
+3. Clicking **“Buy Ticket”** decreases the ticket count and saves data in **localStorage**.
+4. The **Most Viewed Films** page ranks movies based on ticket sales.
+5. Data persists even after refreshing the page.
 
-📂 Setup & Installation
-1️⃣ Clone the Repo
-sh
-Copy
-Edit
-git clone https://github.com/Kane7th/Week-3-Code-Challenge---Compulsory.git
-cd Week-3-Code-Challenge---Compulsory
-2️⃣ Install JSON Server
-Ensure you have json-server installed:
+---
 
-sh
-Copy
-Edit
-npm install -g json-server
-3️⃣ Start the JSON Server
-sh
-Copy
-Edit
-json-server --watch db.json --port 3002
-4️⃣ Run the Project
-Open index.html in your browser or use Live Server in VS Code.
+## 📜 Files & Project Structure
+```
+📂 Flatdango
+│── 📄 index.html       # Main page with movie selection
+│── 📄 most_viewed.html # Page for most booked films
+│── 📄 style.css        # Styling for all pages
+│── 📄 script.js        # Main JavaScript file (handles ticket sales, fetching data)
+│── 📄 most_viewed.js   # Handles ranking for most booked films
+│── 📄 db.json          # JSON database (mock backend)
+```
 
-💡 How It Works
-The app fetches movie data from db.json.
+---
 
-Clicking a movie updates the details section.
-
-Clicking “Buy Ticket” decreases the ticket count.
-
-🐛 Known Issues & Future Improvements
-Add animations for smoother UI transitions
-
-Implement actual user authentication
-
-Store ticket purchases in a database
+## 📑 What You Will Expect
+✅ **Clean & Structured Code** - Readable and well-commented
+✅ **Proper Use of JavaScript** - Fetch API, Event Listeners, DOM Manipulation
+✅ **Data Persistence** - JSON Server & LocalStorage
+✅ **Good UI/UX** - Navigation, Responsive Layout
+✅ **Feature Implementation** - Movie selection, ticket booking, most viewed films
+✅ **GitHub Repository** - Organized with proper commits
+---

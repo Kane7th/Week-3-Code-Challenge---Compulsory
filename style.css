@@ -16,6 +16,27 @@ header {
     background: #222;
     color: rgb(255, 0, 0);
     padding: 15px 0;
+    position: relative;
+}
+
+/* Navigation Menu */
+nav {
+    display: flex;
+    justify-content: center;
+    background: #333;
+    padding: 10px 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: red;
 }
 
 /* Main Layout - 3 Sections (Left, Center, Right) */
@@ -125,6 +146,30 @@ button:hover {
 button:disabled {
     background: #ccc;
     cursor: not-allowed;
+}
+
+/* Most Viewed Films Page */
+#most-viewed {
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+#most-viewed-list {
+    padding: 0;
+    list-style: decimal;
+}
+
+#most-viewed-list li {
+    background: #f8f8f8;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 /* Responsive Design */

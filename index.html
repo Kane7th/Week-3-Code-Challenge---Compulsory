@@ -1,50 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movie Tickets</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <!-- Header -->
     <header>
-        <h1>Now Showing</h1>
+      <h1>Now Showing</h1>
 
-        <!-- Navigation Menu -->
-        <nav>
-            <a href="index.html">🎬 Home</a>
-            <a href="most_viewed.html">📊 Most Viewed Films</a>
-        </nav>
+      <!-- Navigation Menu -->
+      <nav>
+        <a href="index.html">🎬 Home</a>
+        <a href="most_viewed.html">📊 Most Viewed Films</a>
+      </nav>
     </header>
 
     <!-- Main Layout -->
     <main>
+      <!-- Film List (Left Side) -->
+      <aside id="films">
+        <h2>Available Films</h2>
+        <ul id="film-list"></ul>
+        <!-- Button to add a new film -->
+        <button id="add-film-btn">➕ Add Film</button>
+      </aside>
 
-        <!-- Film List (Left Side) -->
-        <aside id="films">
-            <h2>Available Films</h2>
-            <ul id="film-list"></ul>
-        </aside>
+      <!-- Film Poster (Center) -->
+      <section id="film-poster-container">
+        <img id="film-poster" src="" alt="Film Poster" />
+      </section>
 
-        <!-- Film Poster (Center) -->
-        <section id="film-poster-container">
-            <img id="film-poster" src="" alt="Film Poster">
-        </section>
-
-        <!-- Film Details (Right Side) -->
-        <section id="film-details">
-            <h2 id="film-title">Select a movie</h2>
-            <p id="film-description">Description will appear here...</p>
-            <p id="film-runtime"></p>
-            <p id="film-showtime"></p>
-            <p id="film-tickets"></p>
-            <button id="buy-ticket-btn">Buy Ticket</button>
-        </section>
-
+      <!-- Film Details (Right Side) -->
+      <section id="film-details">
+        <h2 id="film-title">Select a movie</h2>
+        <p id="film-description">Description will appear here...</p>
+        <p id="film-runtime"></p>
+        <p id="film-showtime"></p>
+        <p id="film-tickets"></p>
+        <button id="buy-ticket-btn">Buy Ticket</button>
+        <!-- Button to delete a selected film -->
+        <button id="delete-film-btn">🗑️ Delete Film</button>
+      </section>
     </main>
 
+    <!-- Modal for adding a new film -->
+    <div id="film-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Add New Film</h2>
+        <label>Title: <input type="text" id="film-title-input" /></label>
+        <label>Runtime: <input type="number" id="film-runtime-input" /></label>
+        <label
+          >Capacity: <input type="number" id="film-capacity-input"
+        /></label>
+        <label>Showtime: <input type="text" id="film-showtime-input" /></label>
+        <label
+          >Description: <textarea id="film-description-input"></textarea>
+        </label>
+        <label>Poster URL: <input type="text" id="film-poster-input" /></label>
+        <button id="submit-film-btn">Submit</button>
+      </div>
+    </div>
+
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

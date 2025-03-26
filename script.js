@@ -1,60 +1,92 @@
 // Handles fetching, displaying, and updating films
-
 document.addEventListener("DOMContentLoaded", () => {
     fetchFilms();
 });
 
-const API_URL = "http://localhost:3002/films";
+const API_URL = "https://api.jsonbin.io/v3/b/67e3d49c8a456b79667cfd3f/latest";
+const API_PUT_URL = "https://api.jsonbin.io/v3/b/67e3d49c8a456b79667cfd3f"; // Used for updates
+const API_KEY = "$2a$10$7KDfF8TWUXGmAT5uOz9tFuz9EWcuVj0Q40scSBFwydDyGcTIJTBti"; 
 
 // Fetches all films (GET)
 function fetchFilms() {
-    fetch(API_URL)
-        .then(response => response.json())
-        .then(data => {
-            console.log("Fetched films:", data);
-            populateFilmList(data);
-            if (data.length > 0) displayFilmDetails(data[0]);
-        })
-        .catch(error => console.error("Error fetching films:", error));
-}
-
-// Adds a new film (POST)
-function addFilm(film) {
     fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(film)
+        headers: { "X-Master-Key": API_KEY }
     })
     .then(response => response.json())
-    .then(newFilm => {
-        console.log("Film added:", newFilm);
-        fetchFilms();
+    .then(data => {
+        const films = data.record.films; // JSONBin stores the entire object inside `record`
+        console.log("Fetched films:", films);
+        populateFilmList(films);
+        if (films.length > 0) displayFilmDetails(films[0]);
     })
+    .catch(error => console.error("Error fetching films:", error));
+}
+
+// Adds a new film (POST equivalent using PUT)
+function addFilm(newFilm) {
+    fetch(API_URL, {
+        headers: { "X-Master-Key": API_KEY }
+    })
+    .then(response => response.json())
+    .then(data => {
+        const updatedFilms = [...data.record.films, newFilm]; // Append new film
+
+        return fetch(API_PUT_URL, {
+            method: "PUT",
+            headers: { 
+                "Content-Type": "application/json",
+                "X-Master-Key": API_KEY
+            },
+            body: JSON.stringify({ films: updatedFilms }) // Overwrite entire dataset
+        });
+    })
+    .then(() => fetchFilms()) // Refresh UI
     .catch(error => console.error("Error adding film:", error));
 }
 
-// Updates film data (PATCH)
+// Updates film data (PUT instead of PATCH)
 function updateFilm(id, updates) {
-    fetch(`${API_URL}/${id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updates)
+    fetch(API_URL, {
+        headers: { "X-Master-Key": API_KEY }
     })
     .then(response => response.json())
-    .then(updatedFilm => {
-        console.log("Film updated:", updatedFilm);
-        fetchFilms();
+    .then(data => {
+        const updatedFilms = data.record.films.map(film =>
+            film.id === id ? { ...film, ...updates } : film
+        );
+
+        return fetch(API_PUT_URL, {
+            method: "PUT",
+            headers: { 
+                "Content-Type": "application/json",
+                "X-Master-Key": API_KEY
+            },
+            body: JSON.stringify({ films: updatedFilms }) // Overwrite dataset
+        });
     })
+    .then(() => fetchFilms()) // Refresh UI
     .catch(error => console.error("Error updating film:", error));
 }
 
-// Deletes a film (DELETE)
+// Deletes a film (PUT with filtered array)
 function deleteFilm(id) {
-    fetch(`${API_URL}/${id}`, { method: "DELETE" })
-    .then(() => {
-        console.log("Film deleted");
-        fetchFilms();
+    fetch(API_URL, {
+        headers: { "X-Master-Key": API_KEY }
     })
+    .then(response => response.json())
+    .then(data => {
+        const updatedFilms = data.record.films.filter(film => film.id !== id); // Remove film
+
+        return fetch(API_PUT_URL, {
+            method: "PUT",
+            headers: { 
+                "Content-Type": "application/json",
+                "X-Master-Key": API_KEY
+            },
+            body: JSON.stringify({ films: updatedFilms }) // Overwrite dataset
+        });
+    })
+    .then(() => fetchFilms()) // Refresh UI
     .catch(error => console.error("Error deleting film:", error));
 }
 

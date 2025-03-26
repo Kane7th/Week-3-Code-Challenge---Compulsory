@@ -93,11 +93,19 @@ function createFilmListItem(film) {
 
 // Display film details
 function displayFilmDetails(film) {
-    document.getElementById("film-title").textContent = film.title;
-    document.getElementById("film-poster").src = film.poster;
-    document.getElementById("film-runtime").textContent = `Runtime: ${film.runtime} minutes`;
-    document.getElementById("film-showtime").textContent = `Showtime: ${film.showtime}`;
-    document.getElementById("film-description").textContent = film.description;
+    const titleElement = document.getElementById("film-title");
+    const posterElement = document.getElementById("film-poster");
+    const runtimeElement = document.getElementById("film-runtime");
+    const showtimeElement = document.getElementById("film-showtime");
+    const descriptionElement = document.getElementById("film-description");
+
+    if (titleElement) titleElement.textContent = film.title;
+    if (posterElement) posterElement.src = film.poster;
+    if (runtimeElement) runtimeElement.textContent = `Runtime: ${film.runtime} minutes`;
+    if (showtimeElement) showtimeElement.textContent = `Showtime: ${film.showtime}`;
+    if (descriptionElement) descriptionElement.textContent = film.description;
+
+    updateTicketInfo(film); // ✅ Ensure ticket info is updated
 }
 
 // Delete selected film
@@ -190,4 +198,48 @@ function addNewFilm() {
         document.getElementById("film-modal").style.display = "none"; // Close modal
     })
     .catch((error) => console.error("Error adding new film:", error));
+}
+
+function updateTicketInfo(film) {
+    const availableTickets = film.capacity - film.tickets_sold;
+    const ticketInfo = document.getElementById("film-tickets");
+    
+    if (ticketInfo) {
+        ticketInfo.textContent = `Available Tickets: ${availableTickets}`;
+    }
+
+    const buyButton = document.getElementById("buy-ticket-btn");
+    if (buyButton) {
+        buyButton.textContent = availableTickets > 0 ? "Buy Ticket" : "Sold Out";
+        buyButton.disabled = availableTickets === 0;
+        buyButton.onclick = () => buyTicket(film);
+    }
+}
+
+function buyTicket(film) {
+    if (film.capacity - film.tickets_sold > 0) {
+        const updatedTickets = film.tickets_sold + 1;
+
+        fetch(API_URL, { method: "GET", headers: { "Content-Type": "application/json" } })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.record || !Array.isArray(data.record.films)) {
+                    throw new Error("Invalid API response.");
+                }
+
+                const updatedFilms = data.record.films.map(f =>
+                    f.id === film.id ? { ...f, tickets_sold: updatedTickets } : f
+                );
+
+                return fetch(API_PUT_URL, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ films: updatedFilms }),
+                });
+            })
+            .then(() => {
+                fetchFilms(); // ✅ Refresh UI with new ticket data
+            })
+            .catch(error => console.error("Error updating tickets:", error));
+    }
 }
